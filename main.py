@@ -1,4 +1,5 @@
 import knapsack as ks
+import bottom_up as bup
 
 # Put client and test logic here
 
@@ -12,4 +13,8 @@ print("ex_ks capacity", ex_ks.capacity())
 print("ex_ks values", ex_ks.values())
 print("ex_ks weights", ex_ks.weights())
 
-ex_ks.items()
+process = bup.BottomUp(ex_ks.items(), ex_ks.capacity())
+process.debug_print_table()
+
+process.optimal_value()
+process.debug_print_table()
