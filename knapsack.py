@@ -32,3 +32,9 @@ class Knapsack:
 
     def weights(self):
         return self.__weights
+
+    def items(self):
+        items = list()
+        for i in range(len(self.__values)):
+            items.append((self.__values[i], self.__weights[i]))
+        print(items)
