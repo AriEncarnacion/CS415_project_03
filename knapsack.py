@@ -46,14 +46,17 @@ class Knapsack:
     def items(self):
         return self.__items
 
-    def bu_compute_F(self):
-        self.__bup.compute_F()
+    def bu_compute(self):
+        self.__bup.compute()
 
     def bu_opt_val(self):
         return self.__bup.opt_val()
 
     def bu_opt_sub_set(self):
-        return self.__bup.get_opt_subset()
+        return self.__bup.opt_subset()
 
     def bu_cpu_time(self):
-        return self.__bup.cpu_time()
+        return round(self.__bup.cpu_time(), 6)
+
+    def bu_table_space(self):
+        return self.__bup.space_taken()

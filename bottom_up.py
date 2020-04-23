@@ -1,4 +1,5 @@
 import time
+import sys
 
 class BottomUp:
     def __init__(self, items, capacity):
@@ -9,7 +10,11 @@ class BottomUp:
         self.__table = [[-1 for col in range(self.__W + 1)] for row in range(self.__n + 1)]
         self.__cpu_time = 0
 
-    def compute_F(self):
+    def compute(self):
+        # computes optimal value, subset and cpu time
+        self.__compute_opt_subset()
+
+    def __fill_table(self):
         for row in range(self.__n + 1):
             self.__table[row][0] = 0
 
@@ -38,9 +43,9 @@ class BottomUp:
 
         return self.__F(i - 1, j)
 
-    def __optimal_subset(self):
+    def __compute_opt_subset(self):
         t0 = time.perf_counter()
-        self.compute_F()  # compute F table
+        self.__fill_table()  # compute F table
 
         # self.__table[i][j]
         j = self.__W
@@ -61,12 +66,14 @@ class BottomUp:
     def opt_val(self):
         return self.__table[self.__n][self.__W]
 
-    def get_opt_subset(self):
-        self.__optimal_subset()
+    def opt_subset(self):
         return self.__opt_subset
 
     def cpu_time(self):
         return self.__cpu_time
+
+    def space_taken(self):
+        return sys.getsizeof(self.__table)
 
     def debug_print_table(self):
         print("Dynamic programming table")
