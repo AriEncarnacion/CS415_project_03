@@ -32,7 +32,12 @@ class BottomUp:
 
         return self.__F(i - 1, j)
 
+    def optimal_subset(self):
+        print("f")
+
     def debug_print_table(self):
         for row in self.__table:
             print(row)
         print("---------")
+
+
