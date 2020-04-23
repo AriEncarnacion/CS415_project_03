@@ -13,4 +13,6 @@ print("ex_ks capacity", ex_ks.capacity())
 print("ex_ks values", ex_ks.values())
 print("ex_ks weights", ex_ks.weights())
 
+ex_ks.items()
+
 bup.F(ex_ks.values(), ex_ks.weights(), ex_ks.capacity())
