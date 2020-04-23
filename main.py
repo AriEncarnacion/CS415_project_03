@@ -3,18 +3,27 @@ import bottom_up as bup
 
 # Put client and test logic here
 
-capacity_file = "./KnapsackTestData/p00_c.txt"
-values_file = "./KnapsackTestData/p00_v.txt"
-weights_file = "./KnapsackTestData/p00_w.txt"
+capacity_file = "./KnapsackTestData/p01_c.txt"
+values_file = "./KnapsackTestData/p01_v.txt"
+weights_file = "./KnapsackTestData/p01_w.txt"
 
-ex_ks = ks.Knapsack(capacity_file, values_file, weights_file)
+print(F"File containing the capacity, weights, and values are: "
+      F"{capacity_file}, {values_file}, {weights_file}")
+print()
+knapsack = ks.Knapsack(capacity_file, values_file, weights_file, "bu")
 
-print("ex_ks capacity", ex_ks.capacity())
-print("ex_ks values", ex_ks.values())
-print("ex_ks weights", ex_ks.weights())
+cap = knapsack.capacity()
+tot_items = len(knapsack.items())
 
-process = bup.BottomUp(ex_ks.items(), ex_ks.capacity())
-process.debug_print_table()
+knapsack.bu_compute_F()  # this method must be run before any other bu method
 
-process.optimal_value()
-process.debug_print_table()
+bu_opt_val = knapsack.bu_opt_val()
+bu_opt_set = knapsack.bu_opt_sub_set()
+bu_cpu_time = knapsack.bu_cpu_time()
+
+print(F"Knapsack capacity = {cap}. Total number of items = {tot_items}")
+print()
+
+print(F"Traditional Dynamic Programming Optimal value: {bu_opt_val}")
+print(F"Traditional Dynamic Programming Optimal subset: {bu_opt_set}")
+print(F"Traditional Dynamic Programming Time Taken: {bu_cpu_time}")
