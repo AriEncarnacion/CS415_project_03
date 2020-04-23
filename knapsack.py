@@ -37,4 +37,4 @@ class Knapsack:
         items = list()
         for i in range(len(self.__values)):
             items.append((self.__values[i], self.__weights[i]))
-        print(items)
+        return items
