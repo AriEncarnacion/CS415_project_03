@@ -13,4 +13,8 @@ print("ex_ks capacity", ex_ks.capacity())
 print("ex_ks values", ex_ks.values())
 print("ex_ks weights", ex_ks.weights())
 
-bup.F(ex_ks.items(), ex_ks.capacity())
+process = bup.BottomUp(ex_ks.items(), ex_ks.capacity())
+process.debug_print_table()
+
+process.optimal_value()
+process.debug_print_table()
