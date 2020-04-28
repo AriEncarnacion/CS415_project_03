@@ -1,5 +1,4 @@
 from knapsack import Knapsack
-import bottom_up as bup
 import greedy_sort as GS
 from hash_function import BinaryHash
 
@@ -34,20 +33,12 @@ print(F"Traditional Dynamic Programming Space Taken: {bu_space}")
 
 print()
 k = int(len(ks.items()) * ks.capacity() / 2)
-print(k)
+print("k is:", k)
 bin_hash = BinaryHash(len(ks.items()), ks.capacity(), k, ks.items())
-key = bin_hash.build_key()
-print("bin_hash key (r_ij):", key)
+bin_hash.hash_items()
 print()
 
 # Greedy Sort
 gs = GS.GreedySort(ks.values(), ks.weights(), ks.capacity())
 gs.calc_opt_value()
 gs.print()
-
-
-
-
-
-
-
