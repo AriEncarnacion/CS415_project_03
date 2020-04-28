@@ -1,50 +1,56 @@
-# Mock arrays
+class GreedySort:
+    def __init__(self, values, weights, capacity):
+        self.values = values
+        self.weights = weights
+        self.capacity = capacity
+        self.ratios = list(map(lambda x, y: x / y, values, weights))
+        self.subset = []
+        self.operations = 0
+        self.opt_value = 0
 
-maxCapacity = 26
-v = [24, 13, 23, 15, 16]
-w = [12, 7, 11, 8, 9]
-t = [74, 42, 68, 28, 57, 99, 78, 86, 10, 46, 94, 8, 63, 14, 2, 93, 67, 98, 18, 38, 27, 99, 88, 54, 83]
+    # Returns new sorted array
+    def merge_sort(self, arr):
+        if len(arr) == 1:
+            return arr
+        return self.merge(self.merge_sort(arr[:len(arr) // 2]), self.merge_sort(arr[len(arr) // 2:]))
 
-# Returns array of (vi/wi) ratios
-def get_ratios(arr_v, arr_w):
-    r = []
-    i = 0
-    while i < len(arr_v):
-        r.append(arr_v[i] / arr_w[i])
-        i += 1
-    return r
+    # Helper fn: Returns single sorted array
+    def merge(self, larr, rarr):
+        merged = []
+        i, j = 0, 0
 
-# Returns new sorted array
-def merge_sort(arr):
-    if len(arr) == 1:
-        return arr
-    return merge(merge_sort(arr[:len(arr)//2]), merge_sort(arr[len(arr)//2:]))
+        while i < len(larr) and j < len(rarr):
+            self.operations += 1
+            if larr[i] > rarr[j]:  # Use '<' for ascending, '>' for descending
+                merged.append(larr[i])
+                i += 1
+            else:
+                merged.append(rarr[j])
+                j += 1
 
+        if i == len(larr):
+            merged += rarr[j:]
+        if j == len(rarr):
+            merged += larr[i:]
 
-# Helper fn: Returns single sorted array
-def merge(larr, rarr):
-    merged = []
-    i, j = 0, 0
+        return merged
 
-    while i < len(larr) and j < len(rarr):
-        if larr[i] > rarr[j]:               # Use '<' for ascending, '>' for descending
-            merged.append(larr[i])
+    def calc_opt_value(self):
+        cur_capacity = 0
+        i = 0
+        s_arr = self.merge_sort(self.ratios)
+        while cur_capacity + self.weights[self.ratios.index(s_arr[i])] < self.capacity:
+            index = self.ratios.index(s_arr[i])
+            cur_capacity += self.weights[index]
+            self.opt_value += self.values[index]
+            self.subset.append(index + 1)
             i += 1
-        else:
-            merged.append(rarr[j])
-            j += 1
 
-    if i == len(larr):
-        merged += rarr[j:]
-    if j == len(rarr):
-        merged += larr[i:]
+        self.subset.sort()
 
-    return merged
+    def print(self):
+        print()
+        print(F"Greedy Approach Optimal Value: {self.opt_value}")
+        print(F"Greedy Approach Optimal subset: {self.subset}")
+        print(F"Greedy Approach Number of Operations: {self.operations}")
 
-
-#get_ratios(v, w)
-print(t)
-m = merge_sort(t)
-
-print(m)
-print(t)
