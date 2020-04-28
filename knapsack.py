@@ -44,6 +44,7 @@ class Knapsack:
         return self.__weights
 
     def items(self):
+        # returns list of tuples containing (value, weight)
         return self.__items
 
     def bu_compute(self):

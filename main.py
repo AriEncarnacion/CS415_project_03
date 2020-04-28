@@ -1,6 +1,6 @@
-import knapsack as ks
-import bottom_up as bup
+from knapsack import Knapsack
 import greedy_sort as GS
+from hash_function import BinaryHash
 
 # Put client and test logic here
 
@@ -11,17 +11,17 @@ weights_file = "./KnapsackTestData/p01_w.txt"
 print(F"File containing the capacity, weights, and values are: "
       F"{capacity_file}, {values_file}, {weights_file}")
 print()
-knapsack = ks.Knapsack(capacity_file, values_file, weights_file, "bu")
+ks = Knapsack(capacity_file, values_file, weights_file, "bu")
 
-cap = knapsack.capacity()
-tot_items = len(knapsack.items())
+cap = ks.capacity()
+tot_items = len(ks.items())
 
-knapsack.bu_compute()  # must compute before any other bu method
+ks.bu_compute()  # must compute before any other bu method
 
-bu_opt_set = knapsack.bu_opt_sub_set()
-bu_opt_val = knapsack.bu_opt_val()
-bu_cpu_time = knapsack.bu_cpu_time()
-bu_space = knapsack.bu_table_space()
+bu_opt_set = ks.bu_opt_sub_set()
+bu_opt_val = ks.bu_opt_val()
+bu_cpu_time = ks.bu_cpu_time()
+bu_space = ks.bu_table_space()
 
 print(F"Knapsack capacity = {cap}. Total number of items = {tot_items}")
 print()
@@ -31,14 +31,14 @@ print(F"Traditional Dynamic Programming Optimal subset: {bu_opt_set}")
 print(F"Traditional Dynamic Programming Time Taken: {bu_cpu_time}")
 print(F"Traditional Dynamic Programming Space Taken: {bu_space}")
 
+print()
+k = int(len(ks.items()) * ks.capacity() / 2)
+print("k is:", k)
+bin_hash = BinaryHash(len(ks.items()), ks.capacity(), k, ks.items())
+bin_hash.hash_items()
+print()
+
 # Greedy Sort
-gs = GS.GreedySort(knapsack.values(), knapsack.weights(), knapsack.capacity())
+gs = GS.GreedySort(ks.values(), ks.weights(), ks.capacity())
 gs.calc_opt_value()
 gs.print()
-
-
-
-
-
-
-
