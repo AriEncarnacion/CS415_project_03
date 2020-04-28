@@ -1,11 +1,12 @@
 import knapsack as ks
 import bottom_up as bup
+import greedy_sort as GS
 
 # Put client and test logic here
 
-capacity_file = "./KnapsackTestData/p07_c.txt"
-values_file = "./KnapsackTestData/p07_v.txt"
-weights_file = "./KnapsackTestData/p07_w.txt"
+capacity_file = "./KnapsackTestData/p01_c.txt"
+values_file = "./KnapsackTestData/p01_v.txt"
+weights_file = "./KnapsackTestData/p01_w.txt"
 
 print(F"File containing the capacity, weights, and values are: "
       F"{capacity_file}, {values_file}, {weights_file}")
@@ -29,3 +30,15 @@ print(F"Traditional Dynamic Programming Optimal value: {bu_opt_val}")
 print(F"Traditional Dynamic Programming Optimal subset: {bu_opt_set}")
 print(F"Traditional Dynamic Programming Time Taken: {bu_cpu_time}")
 print(F"Traditional Dynamic Programming Space Taken: {bu_space}")
+
+# Greedy Sort
+gs = GS.GreedySort(knapsack.values(), knapsack.weights(), knapsack.capacity())
+gs.calc_opt_value()
+gs.print()
+
+
+
+
+
+
+
