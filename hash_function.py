@@ -4,7 +4,7 @@ import math as m
 class BinaryHash:
 
     def __init__(self, n, W, k, items):
-        self.__h_table = [(None,None)] * k  # holds (value, key)
+        self.__h_table = [(None, None)] * k  # makes array of size k. holds (value, key)
         self.__k = k
         self.__b_n = int(m.ceil(m.log2(n + 1)))
         self.__b_W = int(m.ceil(m.log2(W + 1)))
