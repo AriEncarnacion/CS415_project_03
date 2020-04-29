@@ -2,11 +2,11 @@ from knapsack import Knapsack
 from greedy_sort import GreedySort
 from hash_function import BinaryHash
 from greedy_heap import GreedyHeap
-
+import sys
+import math
 # Put client and test logic here
 
-num = input("Enter File Number: ")
-file_num = str(num)
+file_num = str(sys.argv[1])
 
 capacity_file = './KnapsackTestData/p' + file_num.rjust(2, '0') + '_c.txt'
 values_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_v.txt"
@@ -36,7 +36,7 @@ print(F"Traditional Dynamic Programming Time Taken: {bu_cpu_time}")
 print(F"Traditional Dynamic Programming Space Taken: {bu_space}")
 
 print()
-k = int(len(ks.items()) * ks.capacity() / 2)
+k = int(math.log(ks.capacity())/math.log(2))
 print("k is:", k)
 bin_hash = BinaryHash(len(ks.items()), ks.capacity(), k, ks.items())
 bin_hash.hash_items()
