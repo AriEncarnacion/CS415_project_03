@@ -1,4 +1,4 @@
-import max_heap as heap
+from max_heap import MaxHeap
 
 
 class GreedyHeap:
@@ -7,10 +7,10 @@ class GreedyHeap:
         self.values = values
         self.weights = weights
         self.capacity = capacity
-        self.ratios = list(map(lambda x, y: round(x / y, 4), values, weights))
+        self.ratios = list(map(lambda x, y: x / y, values, weights))
         self.subset = []
         self.opt_value = 0
-        self.heap = heap.MaxHeap(self.ratios)
+        self.heap = MaxHeap(self.ratios)
 
     def calc_opt_value(self):
         self.heap.build_heap()
@@ -32,17 +32,14 @@ class GreedyHeap:
         print(F"Heap-Based Greedy Approach Optimal subset: {self.subset}")
         print(F"Heap-Based Greedy Approach Number of Operations: {self.heap.get_operations()}")
 
-    # def get_heap(self):
-    #     return self.heap.get_heap()
-    #
-    # def build_heap(self):
-    #     self.heap.build_heap()
-    #
-    # def get_operations(self):
-    #     return self.heap.get_operations()
-    #
-    # def get_heap_top(self):
-    #     t = self.heap.delete_max()
-    #     while t != -1:
-    #         print(t)
-    #         t = self.heap.delete_max()
+    def subset_len(self):
+        return int(len(self.subset))
+
+    def build_heap(self):
+        self.heap.build_heap()
+
+    def get_ops(self):
+        return self.heap.get_operations()
+
+    def get_heap(self):
+        return self.heap.heap

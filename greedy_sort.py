@@ -20,8 +20,8 @@ class GreedySort:
         i, j = 0, 0
 
         while i < len(larr) and j < len(rarr):
-            self.operations += 1
-            if larr[i] > rarr[j]:  # Use '<' for ascending, '>' for descending
+            self.operations += 1                # count 1 operation
+            if larr[i] > rarr[j]:
                 merged.append(larr[i])
                 i += 1
             else:
