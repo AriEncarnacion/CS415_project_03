@@ -1,12 +1,16 @@
 from knapsack import Knapsack
-import greedy_sort as GS
+from greedy_sort import GreedySort
 from hash_function import BinaryHash
+from greedy_heap import GreedyHeap
 
 # Put client and test logic here
 
-capacity_file = "./KnapsackTestData/p01_c.txt"
-values_file = "./KnapsackTestData/p01_v.txt"
-weights_file = "./KnapsackTestData/p01_w.txt"
+num = input("Enter File Number: ")
+file_num = str(num)
+
+capacity_file = './KnapsackTestData/p' + file_num.rjust(2, '0') + '_c.txt'
+values_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_v.txt"
+weights_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_w.txt"
 
 print(F"File containing the capacity, weights, and values are: "
       F"{capacity_file}, {values_file}, {weights_file}")
@@ -39,6 +43,11 @@ bin_hash.hash_items()
 print()
 
 # Greedy Sort
-gs = GS.GreedySort(ks.values(), ks.weights(), ks.capacity())
+gs = GreedySort(ks.values(), ks.weights(), ks.capacity())
 gs.calc_opt_value()
 gs.print()
+
+# Greedy Head
+gh = GreedyHeap(ks.values(), ks.weights(), ks.capacity())
+gh.calc_opt_value()
+gh.print()
