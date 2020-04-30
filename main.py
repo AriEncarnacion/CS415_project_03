@@ -54,8 +54,10 @@ print()
 print("Debug:")
 # bin_hash.debug_print_table()  # NOT recommended for large inputs
 # print(F"K is {k}, hash table size is {bin_hash.debug_table_size()}")
-print("Average Length of each linked list is:", int(bin_hash.debug_avg_LL_sizes()))
-print("Highest length of all linked lists is:", bin_hash.debug_highest_LL_size())
+avg_LL_sz = bin_hash.debug_avg_LL_sizes()
+hi_LL_sz = bin_hash.debug_highest_LL_size()
+print("Average Length of each linked list is:", round(avg_LL_sz, 2))  # NOT recommended for large inputs
+print("Highest length of all linked lists is:", int(hi_LL_sz))
 print()
 
 
