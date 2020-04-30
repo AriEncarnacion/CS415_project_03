@@ -35,7 +35,11 @@ print(F"Traditional Dynamic Programming Time Taken: {bu_cpu_time}")
 
 print()
 
-# k = int(math.log(ks.capacity())/math.log(2))
+# TODO: plot K to find optimal value for space/time tradeoff.
+#     Currently thinking K should be somewhere between log_2(W), W/2, and W.
+#     Previously K*2 was implemented but I ran out of memory upon hashing the table.
+#     Progress output has been put into hash_function::BinaryHash::compute() in order to
+#     track progress
 k = int(cap / 2)
 bin_hash = BinaryHash(len(ks.items()), ks.capacity(), k, ks.items())
 
