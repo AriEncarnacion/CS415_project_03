@@ -41,8 +41,7 @@ class BottomUp:
     def __compute_opt_subset(self):
         t0 = time.perf_counter()
         self.__fill_table()  # compute F table
-
-        # self.__table[i][j]
+        
         j = self.__W
         i = self.__n
 
