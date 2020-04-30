@@ -6,7 +6,7 @@ import sys
 import math
 # Put client and test logic here
 
-file_num = str(sys.argv[8])
+file_num = str(sys.argv[9])
 
 capacity_file = './KnapsackTestData/p' + file_num.rjust(2, '0') + '_c.txt'
 values_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_v.txt"
