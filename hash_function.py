@@ -1,6 +1,6 @@
 import math as m
 import time as tm
-
+import sys
 
 class BinaryHash:
 
@@ -12,6 +12,7 @@ class BinaryHash:
         self.__b_n = int(m.ceil(m.log2(n + 1)))
         self.__b_W = int(m.ceil(m.log2(W + 1)))
         self.__items = items
+        self.__opt_subset = []
         self.__cpu_time = 0
 
     def opt_val(self):
@@ -22,20 +23,39 @@ class BinaryHash:
                 return entry[0]
         return "ERROR::hash_function::opt_val(): could not find opt_val"
 
+    def opt_subset(self):
+        return self.__opt_subset
+
     def cpu_time(self):
         return self.__cpu_time
 
     def compute(self):
-        self.__compute_opt_subset()
-
-    def __compute_opt_subset(self):
-        # todo: Implement backtracking algorithm
         t0 = tm.perf_counter()
-
         self.__hash_mem_func(self.__n, self.__W)
-
+        self.__compute_opt_subset(self.__n, self.__W)
+        self.__opt_subset.reverse()
         t1 = tm.perf_counter()
         self.__cpu_time += (t1 - t0)
+
+    def __compute_opt_subset(self, i, j):
+        # todo: Implement backtracking algorithm
+
+        v = self.__items[i - 1][0]
+        w = self.__items[i - 1][1]
+
+        if i == 0:
+            return 0
+
+        if j - w < 0:
+            return 0
+
+        take = v + self.__search_table(i - 1, j - w)
+        drop = self.__search_table(i - 1, j)
+
+        if take > drop and j - w >= 0:
+            self.__opt_subset.append(i)
+            return self.__compute_opt_subset(i - 1, j - w)
+        return self.__compute_opt_subset(i - 1, j)
 
     def __hash_mem_func(self, i, j):
         if i == 0 or j == 0:
@@ -61,7 +81,7 @@ class BinaryHash:
         found = -1
         for entry in self.__h_table[h_idx]:
             if entry[1] == key:
-                found = entry[0]
+                return entry[0]  # return value
         return found
         # if key[1] in self.__h_table[h_idx]:
         #     return search_item
@@ -76,6 +96,9 @@ class BinaryHash:
         self.__h_table[h_idx].append(insert_item)
 
     def __h(self, i, j):
+        if i < 0 or j < 0:
+            print(F"FATAL::hash_function::__h(i, j): i was {i} and j was {j}.")
+            sys.exit(4)
         # print("------------------------------------------------")
         # print("-----START debug statements BinaryHash::h()-----")
         # print("------------------------------------------------")
@@ -121,7 +144,8 @@ class BinaryHash:
         return size
 
     def debug_print_table(self):
-        print(self.__h_table)
+        for row in self.__h_table:
+            print(row)
 
     def debug_avg_LL_sizes(self):
         sm = 0
