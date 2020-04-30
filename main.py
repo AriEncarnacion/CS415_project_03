@@ -6,7 +6,7 @@ import sys
 import math
 # Put client and test logic here
 
-file_num = str(sys.argv[1])
+file_num = str(sys.argv[8])
 
 capacity_file = './KnapsackTestData/p' + file_num.rjust(2, '0') + '_c.txt'
 values_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_v.txt"
@@ -35,8 +35,8 @@ print(F"Traditional Dynamic Programming Time Taken: {bu_cpu_time}")
 
 print()
 
-k = int(math.log(ks.capacity())/math.log(2))
-k = 2 * ks.capacity()
+# k = int(math.log(ks.capacity())/math.log(2))
+k = int(cap / 2)
 bin_hash = BinaryHash(len(ks.items()), ks.capacity(), k, ks.items())
 
 bin_hash.compute()
@@ -61,12 +61,12 @@ print("Space-efficient Dynamic Programming Space Taken:", k)
 # print()
 
 
-# # Greedy Sort
-# gs = GreedySort(ks.values(), ks.weights(), ks.capacity())
-# gs.calc_opt_value()
-# gs.print()
-#
-# # Greedy Head
-# gh = GreedyHeap(ks.values(), ks.weights(), ks.capacity())
-# gh.calc_opt_value()
-# gh.print()
+# Greedy Sort
+gs = GreedySort(ks.values(), ks.weights(), ks.capacity())
+gs.calc_opt_value()
+gs.print()
+
+# Greedy Head
+gh = GreedyHeap(ks.values(), ks.weights(), ks.capacity())
+gh.calc_opt_value()
+gh.print()

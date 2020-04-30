@@ -47,15 +47,16 @@ class BottomUp:
         v = self.__items[i - 1][0]
         w = self.__items[i - 1][1]
 
-        if i == 0:
+        if i == 0 or j == 0:
             return 0
 
-        take = v + self.__table[i - 1][j - w]
-        drop = self.__table[i - 1][j]
+        if j - w >= 0:
+            take = v + self.__table[i - 1][j - w]
+            drop = self.__table[i - 1][j]
+            if take > drop:
+                self.__opt_subset.append(i)
+                return self.__compute_opt_subset(i - 1, j - w)
 
-        if take > drop and j - w >= 0:
-            self.__opt_subset.append(i)
-            return self.__compute_opt_subset(i - 1, j - w)
         return self.__compute_opt_subset(i - 1, j)
 
         # while j > 0:

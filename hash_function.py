@@ -2,6 +2,7 @@ import math as m
 import time as tm
 import sys
 
+
 class BinaryHash:
 
     def __init__(self, n, W, k, items):
@@ -31,9 +32,15 @@ class BinaryHash:
 
     def compute(self):
         t0 = tm.perf_counter()
+        print("Commencing hashing...")
         self.__hash_mem_func(self.__n, self.__W)
+        print("hashing complete.")
+        print("Computing optimal subset...")
         self.__compute_opt_subset(self.__n, self.__W)
+        print("Optimal subset computed.")
+        print("Reversing subset...")
         self.__opt_subset.reverse()
+        print("Finished subset reversal.")
         t1 = tm.perf_counter()
         self.__cpu_time += (t1 - t0)
 
@@ -43,18 +50,16 @@ class BinaryHash:
         v = self.__items[i - 1][0]
         w = self.__items[i - 1][1]
 
-        if i == 0:
+        if i == 0 or j == 0:
             return 0
 
-        if j - w < 0:
-            return 0
+        if j - w >= 0:
+            take = v + self.__search_table(i - 1, j - w)
+            drop = self.__search_table(i - 1, j)
+            if take > drop and j - w >= 0:
+                self.__opt_subset.append(i)
+                return self.__compute_opt_subset(i - 1, j - w)
 
-        take = v + self.__search_table(i - 1, j - w)
-        drop = self.__search_table(i - 1, j)
-
-        if take > drop and j - w >= 0:
-            self.__opt_subset.append(i)
-            return self.__compute_opt_subset(i - 1, j - w)
         return self.__compute_opt_subset(i - 1, j)
 
     def __hash_mem_func(self, i, j):
