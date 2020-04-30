@@ -29,6 +29,7 @@ class BinaryHash:
         self.__compute_opt_subset()
 
     def __compute_opt_subset(self):
+        # todo: Implement backtracking algorithm
         t0 = tm.perf_counter()
 
         self.__hash_mem_func(self.__n, self.__W)
