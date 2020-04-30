@@ -1,6 +1,7 @@
 import time
 import sys
 
+
 class BottomUp:
     def __init__(self, items, capacity):
         self.__items = items
@@ -26,17 +27,19 @@ class BottomUp:
                 self.__table[i][j] = self.__F(i, j)
 
     def __F(self, i, j):
+        if i == 0:
+            return 0
+
+        if j == 0:
+            return 0
+
         if i > 0 and j > 0:
             v = self.__items[i-1][0]
             w = self.__items[i-1][1]
         else:
             v, w = 0, 0
 
-        if i == 0:
-            return 0
 
-        if j == 0:
-            return 0
 
         if j - w >= 0:
             return max(self.__F(i - 1, j), v + self.__F(i - 1, j - w))

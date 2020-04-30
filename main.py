@@ -36,20 +36,23 @@ print(F"Traditional Dynamic Programming Time Taken: {bu_cpu_time}")
 print(F"Traditional Dynamic Programming Space Taken: {bu_space}")
 
 print()
-k = int(math.log(ks.capacity())/math.log(2))
-print("k is:", k)
+# k = int(math.log(ks.capacity())/math.log(2))
+k = 2 * ks.capacity()
 bin_hash = BinaryHash(len(ks.items()), ks.capacity(), k, ks.items())
 bin_hash.hash_items()
+bin_hash.debug_print_table()
+print()
+print(F"K is {k}, hash table size is {bin_hash.debug_table_size()}")
+print("Length of each linked list is:")
+print(bin_hash.debug_LL_sizes())
 print()
 
-bin_hash.debug_print_table()
-
-# Greedy Sort
-gs = GreedySort(ks.values(), ks.weights(), ks.capacity())
-gs.calc_opt_value()
-gs.print()
-
-# Greedy Head
-gh = GreedyHeap(ks.values(), ks.weights(), ks.capacity())
-gh.calc_opt_value()
-gh.print()
+# # Greedy Sort
+# gs = GreedySort(ks.values(), ks.weights(), ks.capacity())
+# gs.calc_opt_value()
+# gs.print()
+#
+# # Greedy Head
+# gh = GreedyHeap(ks.values(), ks.weights(), ks.capacity())
+# gh.calc_opt_value()
+# gh.print()
