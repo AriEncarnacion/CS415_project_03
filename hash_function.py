@@ -1,4 +1,5 @@
 import math as m
+import time as tm
 
 
 class BinaryHash:
@@ -11,64 +12,50 @@ class BinaryHash:
         self.__b_n = int(m.ceil(m.log2(n + 1)))
         self.__b_W = int(m.ceil(m.log2(W + 1)))
         self.__items = items
+        self.__cpu_time = 0
 
-    def __h(self, i, j):
-        print("------------------------------------------------")
-        print("-----START debug statements BinaryHash::h()-----")
-        print("------------------------------------------------")
-        print('i:', i)
-        print('j:', j)
-        print("b_n:", self.__b_n)
-        print("b_w:", self.__b_W)
-        #
+    def opt_val(self):
+        key = self.__h(self.__n, self.__W)
+        h_idx = key % self.__k
+        for entry in self.__h_table[h_idx]:
+            if entry[1] == key:
+                return entry[0]
+        return "ERROR::hash_function::opt_val(): could not find opt_val"
 
-        r_i = format(i, "b")
-        r_j = format(j, "b")
-        print("binary of i:", r_i)
-        print("binary of j:", r_j)
+    def cpu_time(self):
+        return self.__cpu_time
 
-        print("bits in b_n:", self.__b_n, "bits in r_i:", len(r_i))
-        print("bits in b_W:", self.__b_W, "bits in r_j:", len(r_j)
-              )
+    def compute(self):
+        self.__compute_opt_subset()
 
-        while len(r_i) < self.__b_n:
-            r_i = "0" + r_i
+    def __compute_opt_subset(self):
+        t0 = tm.perf_counter()
 
-        while len(r_j) < self.__b_W:
-            r_j = "0" + r_j
+        self.__hash_mem_func(self.__n, self.__W)
 
-        print("adjusted r_i:", r_i)
-        print("adjusted r_j:", r_j)
+        t1 = tm.perf_counter()
+        self.__cpu_time += (t1 - t0)
 
-        r_ij = "0b" + "1" + r_i + r_j  # build r_ij
-        dec_r_ij = int(r_ij, 2)  # convery r_ij to decimal
-        print("r_ij:", r_ij)
-        print("decimal_r_ij:", dec_r_ij)
-        print("----------------------------------------------")
-        print("-----END debug statements BinaryHash::h()-----")
-        print("----------------------------------------------")
-        return dec_r_ij
+    def __hash_mem_func(self, i, j):
+        if i == 0 or j == 0:
+            self.__insert_table(i, j, 0)
+            return 0
 
-    def hash_items(self):
-        for i in range(self.__n + 1):
-            for j in range(self.__W + 1):
-                self.__hash_mem_func(i, j)
-        # for item in self.__items:
-        #     key = self.__h(item[0], item[1])
-        #     #
-        #     # h_idx = key % self.__k
-        #     # hash_item = (item[0], item[1], key)
-        #     # self.__h_table[h_idx].append(hash_item)
-        #     print(F"key for item {item} is {key}")
-        #     self.__hash_mem_func()
+        if self.__search_table(i, j) == -1:
+            v = self.__items[i - 1][0]
+            w = self.__items[i - 1][1]
+            if j < w:
+                val = self.__hash_mem_func(i - 1, j)
+            else:
+                val = max(self.__hash_mem_func(i - 1, j), v + self.__hash_mem_func(i - 1, j - w))
+            self.__insert_table(i, j, val)
 
-    def debug_print_table(self):
-        print(self.__h_table)
+        return self.__search_table(i, j)
 
     def __search_table(self, i, j):
         key = self.__h(i, j)
         h_idx = key % self.__k
-        print(F"Searching table for key {key} at index {h_idx}.")
+        # print(F"Searching table for key {key} at index {h_idx}.")
 
         found = -1
         for entry in self.__h_table[h_idx]:
@@ -84,28 +71,59 @@ class BinaryHash:
         key = self.__h(i, j)
         h_idx = key % self.__k
         insert_item = (val, key)
-        print(F"Inserting {insert_item} into table at index {h_idx}.")
+        # print(F"Inserting {insert_item} into table at index {h_idx}.")
         self.__h_table[h_idx].append(insert_item)
 
-    def __hash_mem_func(self, i, j):
-        if i == 0 or j == 0:
-            return 0
+    def __h(self, i, j):
+        # print("------------------------------------------------")
+        # print("-----START debug statements BinaryHash::h()-----")
+        # print("------------------------------------------------")
+        # print('i:', i)
+        # print('j:', j)
+        # print("b_n:", self.__b_n)
+        # print("b_w:", self.__b_W)
 
-        if self.__search_table(i, j) == -1:
-            w = self.__items[i - 1][1]
-            if j < w:
-                v = self.__hash_mem_func(i - 1, j)
-            else:
-                v = max(self.__hash_mem_func(i - 1, j), self.__items[i - 1][0] + self.__hash_mem_func(i - 1, j - w))
-            self.__insert_table(i, j, v)
+        r_i = format(i, "b")
+        r_j = format(j, "b")
+        # print("binary of i:", r_i)
+        # print("binary of j:", r_j)
+        #
+        # print("bits in b_n:", self.__b_n, "bits in r_i:", len(r_i))
+        # print("bits in b_W:", self.__b_W, "bits in r_j:", len(r_j))
 
-        return self.__search_table(i, j)
+        while len(r_i) < self.__b_n:
+            r_i = "0" + r_i
+
+        while len(r_j) < self.__b_W:
+            r_j = "0" + r_j
+
+        # print("adjusted r_i:", r_i)
+        # print("adjusted r_j:", r_j)
+
+        r_ij = "0b" + "1" + r_i + r_j  # build r_ij
+        dec_r_ij = int(r_ij, 2)  # convery r_ij to decimal
+        # print("r_ij:", r_ij)
+        # print("decimal_r_ij:", dec_r_ij)
+        # print("----------------------------------------------")
+        # print("-----END debug statements BinaryHash::h()-----")
+        # print("----------------------------------------------")
+        return dec_r_ij
 
     def debug_table_size(self):
         return len(self.__h_table)
 
-    def debug_LL_sizes(self):
-        sizes = []
+    def debug_highest_LL_size(self):
+        size = 0
         for lst in self.__h_table:
-            sizes.append(len(lst))
-        return sizes
+            if len(lst) > size:
+                size = len(lst)
+        return size
+
+    def debug_print_table(self):
+        print(self.__h_table)
+
+    def debug_avg_LL_sizes(self):
+        sm = 0
+        for lst in self.__h_table:
+            sm += len(lst)
+        return sm / len(self.__h_table)
