@@ -42,6 +42,8 @@ bin_hash = BinaryHash(len(ks.items()), ks.capacity(), k, ks.items())
 bin_hash.hash_items()
 print()
 
+bin_hash.debug_print_table()
+
 # Greedy Sort
 gs = GreedySort(ks.values(), ks.weights(), ks.capacity())
 gs.calc_opt_value()
