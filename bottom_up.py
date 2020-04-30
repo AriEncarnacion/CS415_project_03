@@ -22,6 +22,7 @@ class BottomUp:
         for col in range(self.__W + 1):
             self.__table[0][col] = 0
 
+        # todo need to revamp __F to be bottom-up
         for i in range(self.__n + 1):
             for j in range(self.__W + 1):
                 self.__table[i][j] = self.__F(i, j)
