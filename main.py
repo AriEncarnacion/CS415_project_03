@@ -70,7 +70,7 @@ gs = GreedySort(ks.values(), ks.weights(), ks.capacity())
 gs.calc_opt_value()
 gs.print()
 
-# Greedy Head
+# Greedy Heap
 gh = GreedyHeap(ks.values(), ks.weights(), ks.capacity())
 gh.calc_opt_value()
 gh.print()
