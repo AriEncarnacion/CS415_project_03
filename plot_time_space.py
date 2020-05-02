@@ -3,6 +3,7 @@ from knapsack import Knapsack
 from hash_function import BinaryHash
 import matplotlib.pyplot as plt
 import math
+import time as tm
 
 
 def plot_stats(bu_space, bu_time, se_space_arr, se_time_arr, space_labels):
@@ -11,21 +12,23 @@ def plot_stats(bu_space, bu_time, se_space_arr, se_time_arr, space_labels):
     ax.set_xlabel('space')
     ax.set_ylabel('time')
 
-    # ax.plot(bu_space, bu_time, 'ro', label='Traditional Method')
-    ax.plot(se_space_arr, se_time_arr, 'bo', label='Space Efficient')
+    # ax.plot(bu_space, bu_time, 'ro', label='Traditional Method')  # plot traditional method
+    ax.plot(se_space_arr, se_time_arr, 'bo', label='Space Efficient')  # plot space efficient method
 
     cords = list(zip(se_space_arr, se_time_arr))
     it = 0
     for cord in cords:
         lbl = "k=" + space_labels[it] + "=" + str(cord[0])
-        ax.annotate(lbl, xy=(cord[0], cord[1]), xytext=(7, -1), textcoords='offset pixels')
+        ax.annotate(lbl, xy=(cord[0], cord[1]), xytext=(-50, 7), textcoords='offset pixels')
         it += 1
 
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1))
 
     plt.tight_layout()
 
-    plt.savefig('fig.png')
+    stamp = tm.ctime(tm.time())
+    fn = 'GenPlots/fig ' + stamp + '.png'
+    plt.savefig(fn)
     plt.show()
 
 
@@ -36,9 +39,8 @@ def plot_compare(ks):
     bu_time = ks.bu_cpu_time()
     del ks
 
-    k_array = [pow(2, n), pow(2, n - 1), pow(2, n - 2), int(W/2), W]  # 2^n, 2^n-1, 2^n-2, W/2, W
-    k_labels = [r'$2^n$', r'$2^{n-1}$', r'$2^{n-2}$', r'$\frac{W}{2}$', r'$W$']
-    k_array.sort()
+    k_array = [pow(2, n), pow(2, n - 1), pow(2, n - 2), pow(2, n - 3), pow(2, n - 4)]  # 2^n, 2^n-1, 2^n-2, W/2, W
+    k_labels = [r'$2^n$', r'$2^{n-1}$', r'$2^{n-2}$', r'$2^{n-3}$', r'$2^{n-4}$']
     se_times = []
     se_h_items = []
     se_empty_buckets = []
