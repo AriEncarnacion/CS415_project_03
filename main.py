@@ -1,6 +1,6 @@
 from knapsack import Knapsack
 from greedy_sort import GreedySort
-from hash_function import BinaryHash
+# from hash_function import BinaryHash
 from greedy_heap import GreedyHeap
 import sys
 import math
