@@ -20,8 +20,8 @@ class GreedySort:
         i, j = 0, 0
 
         while i < len(larr) and j < len(rarr):
-            self.operations += 1                # count 1 operation
-            if larr[i] > rarr[j]:
+            self.operations += 1                # +1 comparison
+            if larr[i] >= rarr[j]:
                 merged.append(larr[i])
                 i += 1
             else:
@@ -40,6 +40,7 @@ class GreedySort:
         i = 0
         s_arr = self.merge_sort(self.ratios)
         while cur_capacity + self.weights[self.ratios.index(s_arr[i])] < self.capacity:
+            self.operations += 1
             index = self.ratios.index(s_arr[i])
             cur_capacity += self.weights[index]
             self.opt_value += self.values[index]

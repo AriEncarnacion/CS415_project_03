@@ -7,7 +7,7 @@ import math
 
 # Put client and test logic here
 
-file_num = str(sys.argv[9])
+file_num = str(sys.argv[1])
 
 capacity_file = './KnapsackTestData/p' + file_num.rjust(2, '0') + '_c.txt'
 values_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_v.txt"
@@ -41,9 +41,8 @@ print()
 #     Previously K*2 was implemented but I ran out of memory upon hashing the table.
 #     Progress output has been put into hash_function::BinaryHash::compute() in order to
 #     track progress
-k = int(cap / 2)  # W/2
-# k = int(cap)
 
+k = int(cap / 2)  # W/2
 
 bin_hash = BinaryHash(len(ks.items()), ks.capacity(), k, ks.items())
 
@@ -74,7 +73,7 @@ gs = GreedySort(ks.values(), ks.weights(), ks.capacity())
 gs.calc_opt_value()
 gs.print()
 
-# Greedy Head
+# Greedy Heap
 gh = GreedyHeap(ks.values(), ks.weights(), ks.capacity())
 gh.calc_opt_value()
 gh.print()
