@@ -41,7 +41,10 @@ print()
 #     Previously K*2 was implemented but I ran out of memory upon hashing the table.
 #     Progress output has been put into hash_function::BinaryHash::compute() in order to
 #     track progress
-k = int(cap / 2)
+k = int(cap / 2)  # W/2
+# k = int(cap)
+
+
 bin_hash = BinaryHash(len(ks.items()), ks.capacity(), k, ks.items())
 
 bin_hash.compute()
@@ -55,15 +58,15 @@ print("Space-efficient Dynamic Programming Optimal subset:", bh_opt_set)
 print("Space-efficient Dynamic Programming Time Taken:", bh_cpu_time)
 print("Space-efficient Dynamic Programming Space Taken:", k)
 
-# print()
-# print("Debug:")
+print()
+print("Debug:")
 # bin_hash.debug_print_table()  # NOT recommended for large inputs
 # print(F"K is {k}, hash table size is {bin_hash.debug_table_size()}")
-# avg_LL_sz = bin_hash.debug_avg_LL_sizes()
-# hi_LL_sz = bin_hash.debug_highest_LL_size()
-# print("Average Length of each linked list is:", round(avg_LL_sz, 2))  # NOT recommended for large inputs
-# print("Highest length of all linked lists is:", int(hi_LL_sz))
-# print()
+avg_LL_sz = bin_hash.debug_avg_LL_sizes()
+hi_LL_sz = bin_hash.debug_highest_LL_size()
+print("Average Length of each linked list is:", round(avg_LL_sz, 2))  # NOT recommended for large inputs
+print("Highest length of all linked lists is:", int(hi_LL_sz))
+print()
 
 
 # Greedy Sort

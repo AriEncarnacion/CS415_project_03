@@ -45,7 +45,6 @@ class BinaryHash:
         self.__cpu_time += (t1 - t0)
 
     def __compute_opt_subset(self, i, j):
-        # todo: Implement backtracking algorithm
 
         v = self.__items[i - 1][0]
         w = self.__items[i - 1][1]
