@@ -55,3 +55,5 @@ class GreedySort:
         print(F"Greedy Approach Optimal subset: {self.subset}")
         print(F"Greedy Approach Number of Operations: {self.operations}")
 
+    def get_ops(self):
+        return self.operations
