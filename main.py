@@ -8,7 +8,7 @@ import plot_time_space as plt_cmp
 
 # Put client and test logic here
 
-file_num = str(sys.argv[9])
+file_num = str(sys.argv[1])
 
 capacity_file = './KnapsackTestData/p' + file_num.rjust(2, '0') + '_c.txt'
 values_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_v.txt"
