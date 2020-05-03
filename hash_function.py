@@ -15,6 +15,7 @@ class BinaryHash:
         self.__items = items
         self.__opt_subset = []
         self.__cpu_time = 0
+        self.__h_items = 0
 
     def opt_val(self):
         key = self.__h(self.__n, self.__W)
@@ -32,20 +33,19 @@ class BinaryHash:
 
     def compute(self):
         t0 = tm.perf_counter()
-        print("Commencing hashing...")
+        # print("Commencing hashing...")
         self.__hash_mem_func(self.__n, self.__W)
-        print("hashing complete.")
-        print("Computing optimal subset...")
+        # print("hashing complete.")
+        # print("Computing optimal subset...")
         self.__compute_opt_subset(self.__n, self.__W)
-        print("Optimal subset computed.")
-        print("Reversing subset...")
+        # print("Optimal subset computed.")
+        # print("Reversing subset...")
         self.__opt_subset.reverse()
-        print("Finished subset reversal.")
+        # print("Finished subset reversal.")
         t1 = tm.perf_counter()
         self.__cpu_time += (t1 - t0)
 
     def __compute_opt_subset(self, i, j):
-        # todo: Implement backtracking algorithm
 
         v = self.__items[i - 1][0]
         w = self.__items[i - 1][1]
@@ -99,6 +99,7 @@ class BinaryHash:
         insert_item = (val, key)
         # print(F"Inserting {insert_item} into table at index {h_idx}.")
         self.__h_table[h_idx].append(insert_item)
+        self.__h_items += 1
 
     def __h(self, i, j):
         if i < 0 or j < 0:
@@ -157,3 +158,13 @@ class BinaryHash:
         for lst in self.__h_table:
             sm += len(lst)
         return sm / len(self.__h_table)
+
+    def debug_h_items(self):
+        return self.__h_items
+
+    def debug_empty_bucket(self):
+        count = 0
+        for l in self.__h_table:
+            if len(l) == 0:
+                count += 1
+        return count
