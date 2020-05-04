@@ -5,8 +5,7 @@ In this project we compare the time and space efficiencies of different programm
 in solving the Knapsack problem. 
 Our tasks employ **Dynamic Programming** and an approach based on the **Greedy Algorithm**.
 
-Before running the program you must create folders `KnapsackTestData` and `GenPlots` in the same directory you clone this 
-repo into. The folder `KnapsackTestData` must contain at least 3 files of the form `p<num>_<char>.txt`, where `<num>` is `00-99` and 
+The folder `KnapsackTestData` contains files of the form `p<num>_<char>.txt`, where `<num>` is `00-08` and 
 `<char>` is `c`, `v`, and `w` indicating the capacity, values, and weights respectively. 
 
 To run the program use the commands:
@@ -17,9 +16,11 @@ $ cd CS415_project_03
 $ python3 main.py <arg>
 ```
 
-`<arg>` is an `int` between `1-99` 
+`<arg>` is an `int` between `0-8` 
 
 ### Plotting Results
+Graphs are output to folder `GenPlots` and have extension `.png`
+
 
 A scatter plot is used to compare operation time between
 two different **Greedy Algorithm** approaches. The traditional
