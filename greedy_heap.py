@@ -32,8 +32,8 @@ class GreedyHeap:
         print(F"Heap-Based Greedy Approach Optimal subset: {self.subset}")
         print(F"Heap-Based Greedy Approach Number of Operations: {self.heap.get_operations()}")
 
-    def subset_len(self):
-        return int(len(self.subset))
+    def get_subset(self):
+        return self.subset
 
     def build_heap(self):
         self.heap.build_heap()
@@ -42,4 +42,4 @@ class GreedyHeap:
         return self.heap.get_operations()
 
     def get_heap(self):
-        return self.heap.heap
+        return self.heap.max_heap
