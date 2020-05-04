@@ -76,6 +76,21 @@ class BottomUp:
     def cpu_time(self):
         return self.__cpu_time
 
+    def print_report(self):
+        bu_opt_set = self.__opt_subset
+        bu_opt_val = self.__table[self.__n][self.__W]
+        bu_cpu_time = round(self.__cpu_time, 4)
+
+        print(F"Knapsack capacity = {self.__W}. Total number of items = {self.__n}")
+        print()
+
+        print(F"Traditional Dynamic Programming Optimal value: {bu_opt_val}")
+        print(F"Traditional Dynamic Programming Optimal subset: {bu_opt_set}")
+        print(F"Traditional Dynamic Programming Time Taken: {bu_cpu_time}")
+        print(F"Traditional Dynamic Programming Space Taken: n * W = {self.__n * self.__W}")
+
+        print()
+
     def debug_print_table(self):
         print("Dynamic programming table")
         for row in self.__table:

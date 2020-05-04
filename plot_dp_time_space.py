@@ -18,8 +18,9 @@ def plot_stats(bu_space, bu_time, se_space_arr, se_time_arr, space_labels):
     cords = list(zip(se_space_arr, se_time_arr))
     it = 0
     for cord in cords:
-        lbl = "k=" + space_labels[it] + "=" + str(cord[0])
-        ax.annotate(lbl, xy=(cord[0], cord[1]), xytext=(-50, 7), textcoords='offset pixels')
+        # lbl = "k=" + space_labels[it] + "=" + str(cord[0])
+        lbl = space_labels[it]
+        ax.annotate(lbl, xy=(cord[0], cord[1]), xytext=(0, 7), textcoords='offset pixels')
         it += 1
 
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1))
@@ -39,8 +40,21 @@ def plot_compare(ks):
     bu_time = ks.bu_cpu_time()
     del ks
 
-    k_array = [pow(2, n), pow(2, n - 1), pow(2, n - 2), pow(2, n - 3), pow(2, n - 4)]  # 2^n, 2^n-1, 2^n-2, W/2, W
-    k_labels = [r'$2^n$', r'$2^{n-1}$', r'$2^{n-2}$', r'$2^{n-3}$', r'$2^{n-4}$']
+    # TODO: ensure order in which values are tested dont compromise
+    	# the time complexity. Test 2^n-4 2^n-10 in both combinations
+
+    # W, W/2, 2^log(W), n * (W/2), 2^n-m [ 10 < m < n]
+    k_array = [W, int(W/2), int(pow(2, math.log2(W))), int(n * (W/2))]
+    k_labels = [r'$W$', r'$\frac{W}{2}$', r'$2^{\log{W}}$', r'$n*\frac{W}{2}$']
+    for m in range(0, 11):
+        k_array.append(int(pow(2, n - m)))
+        if m == 0:
+            k_labels.append(r'$2^{n}$')
+        else:
+            k_labels.append('$2^{n-%i}$' % m)
+    print(k_array)
+    print(k_labels)
+
     se_times = []
     se_h_items = []
     se_empty_buckets = []
