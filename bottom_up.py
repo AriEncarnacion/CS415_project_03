@@ -12,7 +12,6 @@ class BottomUp:
         self.__cpu_time = 0
 
     def compute(self):
-        # computes optimal value, subset and cpu time
         t0 = time.perf_counter()
         self.__fill_table()  # compute F table
         self.__compute_opt_subset(self.__n, self.__W)
@@ -59,14 +58,6 @@ class BottomUp:
 
         return self.__compute_opt_subset(i - 1, j)
 
-        # while j > 0:
-        #     v = self.__items[i - 1][0]
-        #     w = self.__items[i - 1][1]
-        #     if v + self.__table[i - 1][j - w] > self.__table[i - 1][j]:
-        #         self.__opt_subset.append(i)
-        #         j -= self.__items[i - 1][1]
-        #     i -= 1
-
     def opt_val(self):
         return self.__table[self.__n][self.__W]
 
@@ -76,11 +67,18 @@ class BottomUp:
     def cpu_time(self):
         return self.__cpu_time
 
-    def debug_print_table(self):
-        print("Dynamic programming table")
-        for row in self.__table:
-            print(row)
-        print("---------")
+    def print_report(self):
+        bu_opt_set = self.__opt_subset
+        bu_opt_val = self.__table[self.__n][self.__W]
+        bu_cpu_time = round(self.__cpu_time, 4)
+
+        print(F"Knapsack capacity = {self.__W}. Total number of items = {self.__n}")
+        print()
+        print(F"Traditional Dynamic Programming Optimal value: {bu_opt_val}")
+        print(F"Traditional Dynamic Programming Optimal subset: {bu_opt_set}")
+        print(F"Traditional Dynamic Programming Time Taken: {bu_cpu_time}")
+        print(F"Traditional Dynamic Programming Space Taken: n * W = {self.__n * self.__W}")
+        print()
 
 
 

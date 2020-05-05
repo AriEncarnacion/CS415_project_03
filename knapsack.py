@@ -59,5 +59,6 @@ class Knapsack:
     def bu_cpu_time(self):
         return round(self.__bup.cpu_time(), 6)
 
-    def bu_table_space(self):
-        return self.__bup.space_taken()
+    def bu_print_report(self):
+        self.__bup.print_report()
+
