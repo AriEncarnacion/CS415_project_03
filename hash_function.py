@@ -6,9 +6,7 @@ import sys
 class BinaryHash:
 
     def __init__(self, n, W, k, items):
-        print(F"Building hash table for k = {k}...")
         self.__h_table = [[] for _ in range(k)]  # makes array of size k. holds (value, key)
-        print(F"Hash table built.")
         self.__k = k
         self.__n = n
         self.__W = W
@@ -45,18 +43,11 @@ class BinaryHash:
 
     def compute(self):
         t0 = tm.perf_counter()
-        print("Commencing hashing...")
         self.__hash_mem_func(self.__n, self.__W)
-        print("hashing complete.")
-        print("Computing optimal subset...")
         self.__compute_opt_subset(self.__n, self.__W)
-        print("Optimal subset computed.")
         self.__opt_subset.reverse()  # compensate for append order
-        print("Computing CPU time...")
         t1 = tm.perf_counter()
         self.__cpu_time += (t1 - t0)
-        print("CPU time computed.")
-        print()
 
     def __compute_opt_subset(self, i, j):
 
@@ -77,7 +68,6 @@ class BinaryHash:
 
     def __hash_mem_func(self, i, j):
         if i == 0 or j == 0:
-            # self.__insert_table(i, j, 0)
             return 0
 
         if self.__search_table(i, j) == -1:
@@ -94,12 +84,11 @@ class BinaryHash:
     def __search_table(self, i, j):
         key = self.__h(i, j)
         h_idx = key % self.__k
-        # print(F"Searching table for key {key} at index {h_idx}.")
 
         found = -1
         for entry in self.__h_table[h_idx]:
             if entry[1] == key:
-                return entry[0]  # return value
+                return entry[0]  # return value at h_idx
         return found
 
     def __insert_table(self, i, j, val):
@@ -127,33 +116,3 @@ class BinaryHash:
         dec_r_ij = int(r_ij, 2)  # convert r_ij to decimal
 
         return dec_r_ij
-
-    def debug_table_size(self):
-        return len(self.__h_table)
-
-    def debug_highest_LL_size(self):
-        size = 0
-        for lst in self.__h_table:
-            if len(lst) > size:
-                size = len(lst)
-        return size
-
-    def debug_print_table(self):
-        for row in self.__h_table:
-            print(row)
-
-    def debug_avg_LL_sizes(self):
-        sm = 0
-        for lst in self.__h_table:
-            sm += len(lst)
-        return sm / len(self.__h_table)
-
-    def debug_h_items(self):
-        return self.__h_items
-
-    def debug_empty_bucket(self):
-        count = 0
-        for l in self.__h_table:
-            if len(l) == 0:
-                count += 1
-        return count
