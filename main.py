@@ -5,7 +5,7 @@ from greedy_heap import GreedyHeap
 import sys
 import math
 
-file_num = str(sys.argv[9])
+file_num = str(sys.argv[1])
 
 capacity_file = './KnapsackTestData/p' + file_num.rjust(2, '0') + '_c.txt'
 values_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_v.txt"
