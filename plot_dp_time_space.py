@@ -73,7 +73,7 @@ def plot_compare(ks):
         print()
 
 
-file_num = '7'
+file_num = '8'
 
 capacity_file = './KnapsackTestData/p' + file_num.rjust(2, '0') + '_c.txt'
 values_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_v.txt"
