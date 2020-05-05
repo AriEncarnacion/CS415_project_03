@@ -12,7 +12,7 @@ def plot_stats(bu_space, bu_time, se_space_arr, se_time_arr, space_labels):
     ax.set_xlabel('space')
     ax.set_ylabel('time')
 
-    ax.plot(bu_space, bu_time, 'ro', label='Traditional Method')  # uncomment to plot traditional method
+    # ax.plot(bu_space, bu_time, 'ro', label='Traditional Method')  # uncomment to plot traditional method
     ax.plot(se_space_arr, se_time_arr, 'bo', label='Space Efficient')  # plot space efficient method
 
     cords = list(zip(se_space_arr, se_time_arr))
@@ -30,6 +30,8 @@ def plot_stats(bu_space, bu_time, se_space_arr, se_time_arr, space_labels):
     fn = 'GenPlots/Dyn_Prog_Time_Space' + stamp + '.png'
     plt.savefig(fn)
     plt.show()
+    print(F"Plot saved as '{fn}'")
+    print()
 
 
 def plot_compare(ks):
@@ -66,7 +68,21 @@ def plot_compare(ks):
     plot_stats(n * W, bu_time, k_array, se_times, k_labels)
     for i in range(len(k_array)):
         print(F"For K of {k_labels[i]}:")
-        print(F"items: {se_h_items[i]}")
-        print(F"Empty buckets: {se_empty_buckets[i]}")
+        print(F"K numerical value: {k_array[i]}")
         print(F"Array of Space Efficient cpu-time: {se_times[i]}")
         print()
+
+
+file_num = '7'
+
+capacity_file = './KnapsackTestData/p' + file_num.rjust(2, '0') + '_c.txt'
+values_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_v.txt"
+weights_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_w.txt"
+
+print(F"File containing the capacity, weights, and values are: "
+      F"{capacity_file}, {values_file}, {weights_file}")
+print()
+
+knapsack = Knapsack(capacity_file, values_file, weights_file, "bu")
+knapsack.bu_compute()  # must compute before any other bu method
+plot_compare(knapsack)  # uncomment to plot dynamic programming charts

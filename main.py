@@ -4,7 +4,6 @@ from hash_function import BinaryHash
 from greedy_heap import GreedyHeap
 import sys
 import math
-import plot_dp_time_space as plt_cmp
 
 file_num = str(sys.argv[9])
 
@@ -21,7 +20,6 @@ ks = Knapsack(capacity_file, values_file, weights_file, "bu")
 W = ks.capacity()
 n = len(ks.items())
 ks.bu_compute()  # must compute before any other bu method
-# plt_cmp.plot_compare(ks)  # uncomment to plot dynamic programming charts
 ks.bu_print_report()
 
 k = int(math.pow(2, n - 4))  # k = 2^n-4
