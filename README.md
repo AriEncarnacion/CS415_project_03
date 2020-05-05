@@ -66,9 +66,6 @@ is used. Values of `K` tested are:
 
 `W`, `W/2`, and `2^(n-m) for 1 < m < 6`.
 
-A cluster will be seen in the bottom left hand corner and the labels make it hard to distinguish between
-the optimal values. However, that cluster holds our determined optimal value, `k = 2^(n-4)`.
-
 To generate this plot run the following command:
 (Please note this may take a few minutes to run)
 ```
