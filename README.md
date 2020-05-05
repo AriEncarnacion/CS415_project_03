@@ -1,6 +1,16 @@
 ## CS415 Project 3: Knapsack
 ### Ari Encarnacion, Vincent Valenzuela
 
+To run this project, please use Python interpreter **3.7+**.
+The modules used for this project are:
+```
+sys
+math
+matplotlib.pyplot
+time
+```
+Please install these through your preferred method if need be.
+
 In this project we compare the time and space efficiencies of different programming techniques 
 for solving the Knapsack problem. 
 Our tasks employ **Dynamic Programming** and an approach based on the **Greedy Algorithm**.
