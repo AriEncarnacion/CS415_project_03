@@ -1,5 +1,3 @@
 __pycache__/
 .idea/
 KnapsackTestData/
-GenPlots/*
-!.gitignore
