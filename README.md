@@ -70,6 +70,7 @@ A cluster will be seen in the bottom left hand corner and the labels make it har
 the optimal values. However, that cluster holds our determined optimal value, `k = 2^(n-4)`.
 
 To generate this plot run the following command:
+(Please note this may take a few minutes to run)
 ```
 $ python3 plot_dp_time_space.py
 ```
