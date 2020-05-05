@@ -57,3 +57,6 @@ class GreedySort:
 
     def get_ops(self):
         return self.operations
+
+    def get_subset(self):
+        return self.subset

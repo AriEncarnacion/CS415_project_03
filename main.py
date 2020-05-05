@@ -25,16 +25,16 @@ n = len(ks.items())
 
 ks.bu_compute()  # must compute before any other bu method
 
-print("Plotting to compare...")
-plt_cmp.plot_compare(ks)
+# print("Plotting to compare...")
+# plt_cmp.plot_compare(ks)
 
-# ks.bu_print_report()
-#
-# k = int(math.pow(2, n - 2))  # k = 2^n-2
-# bin_hash = BinaryHash(n, W, k, ks.items())
-# bin_hash.compute()
-#
-# bin_hash.print_report()
+ks.bu_print_report()
+
+k = int(math.pow(2, n - 4))  # k = 2^n-2
+bin_hash = BinaryHash(n, W, k, ks.items())
+bin_hash.compute()
+
+bin_hash.print_report()
 
 # print()
 # print("Debug:")
@@ -46,12 +46,12 @@ plt_cmp.plot_compare(ks)
 # print("Highest length of all linked lists is:", int(hi_LL_sz))
 # print()
 
-# # Greedy Sort
-# gs = GreedySort(ks.values(), ks.weights(), ks.capacity())
-# gs.calc_opt_value()
-# gs.print()
-#
-# # Greedy Heap
-# gh = GreedyHeap(ks.values(), ks.weights(), ks.capacity())
-# gh.calc_opt_value()
-# gh.print()
+# Greedy Sort
+gs = GreedySort(ks.values(), ks.weights(), ks.capacity())
+gs.calc_opt_value()
+gs.print()
+
+# Greedy Heap
+gh = GreedyHeap(ks.values(), ks.weights(), ks.capacity())
+gh.calc_opt_value()
+gh.print()

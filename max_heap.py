@@ -1,8 +1,8 @@
 class MaxHeap:
 
     def __init__(self, ratios):
-        self.heap = [*[-1], *ratios]  # add -1 to front of heap to simplify integer division
-        self.n = len(self.heap) - 1
+        self.max_heap = [*[-1], *ratios]  # add -1 to front of heap to simplify integer division
+        self.n = len(self.max_heap) - 1
         self.operations = 0
 
     def build_heap(self):
@@ -18,7 +18,7 @@ class MaxHeap:
             if pt*2+1 > self.n:
                 self.swap(pt, pt*2)
                 return
-            elif self.heap[pt*2] >= self.heap[pt*2+1]:
+            elif self.max_heap[pt * 2] >= self.max_heap[pt * 2 + 1]:
                 self.swap(pt, pt*2)
                 pt = pt*2
             else:
@@ -28,14 +28,14 @@ class MaxHeap:
 
     def swap(self, pt, cd):
         self.operations += 1                            # +1 comparison, is parent > child
-        if self.heap[pt] < self.heap[cd]:
-            self.heap[pt], self.heap[cd] = self.heap[cd], self.heap[pt]
+        if self.max_heap[pt] < self.max_heap[cd]:
+            self.max_heap[pt], self.max_heap[cd] = self.max_heap[cd], self.max_heap[pt]
 
     def delete_max(self):
         if self.n == 0:
             return -1
-        m = self.heap[1]
-        self.heap[1], self.heap[self.n] = self.heap[self.n], self.heap[1]
+        m = self.max_heap[1]
+        self.max_heap[1], self.max_heap[self.n] = self.max_heap[self.n], self.max_heap[1]
         self.n -= 1
         self.sift_down(1)
         return m
@@ -44,5 +44,5 @@ class MaxHeap:
         return self.operations
 
     def get_heap(self):
-        return self.heap
+        return self.max_heap
 
