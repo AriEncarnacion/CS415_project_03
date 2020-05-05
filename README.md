@@ -1,6 +1,11 @@
 ## CS415 Project 3: Knapsack
 ### Ari Encarnacion, Vincent Valenzuela
 
+### Setup
+To obtain this repository, run the following command:
+```
+$ git clone <repoLink>
+```
 To run this project, please use Python interpreter **3.7+**.
 The modules used for this project are:
 ```
@@ -11,6 +16,9 @@ time
 ```
 Please install these through your preferred method if need be.
 
+#
+
+### Running the Program
 In this project we compare the time and space efficiencies of different programming techniques 
 for solving the Knapsack problem. 
 Our tasks employ **Dynamic Programming** and an approach based on the **Greedy Algorithm**.
@@ -21,7 +29,6 @@ The folder `KnapsackTestData` contains files of the form `p<num>_<char>.txt`, wh
 To run the program use the commands:
 
 ``` 
-$ git clone <repoLink>
 $ cd CS415_project_03
 $ python3 main.py <arg>
 ```
@@ -31,10 +38,12 @@ $ python3 main.py <arg>
 This will generate the optimal value and optimal subsets for both the dynamic programming
 and greedy-algorithm solutions to the knapsack problem.
 
+#
+
 ### Plotting Results
 Graphs are output to folder `GenPlots` and have extension `.png`
 
-# Greedy Algorithm Plots
+#### Greedy Algorithm Plots
 A scatter plot is used to compare operation time between
 two different **Greedy Algorithm** approaches. The traditional
 approach uses a merge-sort algorithm with time complexity *O(nlogn)*
@@ -47,7 +56,7 @@ To generate plots for the **Greedy Approach**
 $ python3 plot_greedy_time.py
 ```
 
-# Dynamic Programming Plots
+#### Dynamic Programming Plots
 To find the optimal solution for the space efficient approach to the **dynamic programming** solution,
 a scatterplot is generated in order to visualize and compare time-space tradeoffs for differnt
 values of `K`. When plotting, optimal values are those that fall as close to the graph's origin as possible.
