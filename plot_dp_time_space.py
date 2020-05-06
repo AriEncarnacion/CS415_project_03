@@ -12,15 +12,15 @@ def plot_stats(bu_space, bu_time, se_space_arr, se_time_arr, space_labels):
     ax.set_xlabel('space')
     ax.set_ylabel('time')
 
-    # ax.plot(bu_space, bu_time, 'ro', label='Traditional Method')  # uncomment to plot traditional method
+    ax.plot(bu_space, bu_time, 'ro', label='Traditional Method')  # uncomment to plot traditional method
     ax.plot(se_space_arr, se_time_arr, 'bo', label='Space Efficient')  # plot space efficient method
 
-    cords = list(zip(se_space_arr, se_time_arr))
-    it = 0
-    for cord in cords:
-        lbl = space_labels[it]
-        ax.annotate(lbl, xy=(cord[0], cord[1]), xytext=(0, 7), textcoords='offset pixels')
-        it += 1
+    # cords = list(zip(se_space_arr, se_time_arr))
+    # it = 0
+    # for cord in cords:
+    #     lbl = space_labels[it]
+    #     ax.annotate(lbl, xy=(cord[0], cord[1]), xytext=(0, 7), textcoords='offset pixels')
+    #     it += 1
 
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1))
 
@@ -55,8 +55,6 @@ def plot_compare(ks):
     print(k_labels)
 
     se_times = []
-    se_h_items = []
-    se_empty_buckets = []
     for k in k_array:
         print(k)
         bin_hash = BinaryHash(n, W, k, ks_items)
@@ -84,5 +82,5 @@ print(F"File containing the capacity, weights, and values are: "
 print()
 
 knapsack = Knapsack(capacity_file, values_file, weights_file, "bu")
-knapsack.bu_compute()  # must compute before any other bu method
-plot_compare(knapsack)  # uncomment to plot dynamic programming charts
+knapsack.bu_compute()
+plot_compare(knapsack)

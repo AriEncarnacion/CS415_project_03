@@ -20,6 +20,7 @@ ks = Knapsack(capacity_file, values_file, weights_file, "bu")
 W = ks.capacity()
 n = len(ks.items())
 ks.bu_compute()  # must compute before any other bu method
+
 ks.bu_print_report()
 
 k = int(math.pow(2, n - 4))  # k = 2^n-4
