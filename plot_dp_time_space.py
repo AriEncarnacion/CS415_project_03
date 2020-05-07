@@ -5,22 +5,27 @@ import matplotlib.pyplot as plt
 import math
 import time as tm
 
+file_num = '8'
 
-def plot_stats(bu_space, bu_time, se_space_arr, se_time_arr, space_labels):
+
+def plot_stats(bu_space, bu_time, se_space_arr, se_time_arr, space_labels, opt_val, opt_time, opt_lbl):
     fig, ax = plt.subplots()
     ax.set_title('Time vs Space: Traditional vs Space-Efficient Dynamic Programming')
     ax.set_xlabel('space')
     ax.set_ylabel('time')
 
-    ax.plot(bu_space, bu_time, 'ro', label='Traditional Method')  # uncomment to plot traditional method
+    # ax.plot(bu_space, bu_time, 'ro', label='Traditional Method')  # uncomment to plot traditional method
     ax.plot(se_space_arr, se_time_arr, 'bo', label='Space Efficient')  # plot space efficient method
+    ax.plot(opt_val, opt_time, 'g*', label='Optimal K')
 
-    # cords = list(zip(se_space_arr, se_time_arr))
-    # it = 0
-    # for cord in cords:
-    #     lbl = space_labels[it]
-    #     ax.annotate(lbl, xy=(cord[0], cord[1]), xytext=(0, 7), textcoords='offset pixels')
-    #     it += 1
+    cords = list(zip(se_space_arr, se_time_arr))
+    it = 0
+    for cord in cords:
+        lbl = space_labels[it]
+        ax.annotate(lbl, xy=(cord[0], cord[1]), xytext=(0, 7), textcoords='offset pixels')
+        it += 1
+
+    ax.annotate(opt_lbl, xy=(opt_val, opt_time), xytext=(0, 7), textcoords='offset pixels')
 
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1))
 
@@ -41,18 +46,24 @@ def plot_compare(ks):
     bu_time = ks.bu_cpu_time()
     del ks
 
-    # W, W/2, 2^(n-m) [ for 1 < m < 6]
-    k_array = [W, int(W/2)]
-    k_labels = [r'$W$', r'$\frac{W}{2}$']
+    m = math.floor(math.log2(n))
+    k_opt = pow(2, math.floor(math.log2(n * W) - m))
+    k_opt_lbl = r'$2^{\log(n*W)- \log_2{n}}$'
+    print("Optimal K:", k_opt_lbl, "=", k_opt)
 
-    for m in range(1, 7):
-        k_array.append(int(pow(2, n - m)))
-        if m == 0:
-            k_labels.append(r'$2^{n}$')
-        else:
-            k_labels.append('$2^{n-%i}$' % m)
+    k_array = []
+    k_labels = []
+    for m in range(1, 8):
+        k_array.append(pow(2, math.floor(math.log2(n * W) - m)))
+        k_labels.append(r'$2^{\log(nW)-%i}$' % m)
+
     print(k_array)
     print(k_labels)
+
+    bin_hash = BinaryHash(n, W, k_opt, ks_items)
+    bin_hash.compute()
+    k_opt_time = bin_hash.cpu_time()
+    del bin_hash
 
     se_times = []
     for k in k_array:
@@ -63,15 +74,17 @@ def plot_compare(ks):
         del bin_hash
 
     print()
-    plot_stats(n * W, bu_time, k_array, se_times, k_labels)
+    plot_stats(n * W, bu_time, k_array, se_times, k_labels, k_opt, k_opt_time,k_opt_lbl)
+    print(F"Optimal k: {k_opt_lbl}:")
+    print(F"Optimal K value: {k_opt}")
+    print(F"Optimal K time: {round(k_opt_time, 4)}")
+    print()
+
     for i in range(len(k_array)):
         print(F"For K of {k_labels[i]}:")
         print(F"K numerical value: {k_array[i]}")
         print(F"Array of Space Efficient cpu-time: {se_times[i]}")
         print()
-
-
-file_num = '8'
 
 capacity_file = './KnapsackTestData/p' + file_num.rjust(2, '0') + '_c.txt'
 values_file = "./KnapsackTestData/p" + file_num.rjust(2, "0") + "_v.txt"

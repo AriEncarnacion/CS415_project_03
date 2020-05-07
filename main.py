@@ -23,7 +23,8 @@ ks.bu_compute()  # must compute before any other bu method
 
 ks.bu_print_report()
 
-k = int(math.pow(2, n - 4))  # k = 2^n-4
+m = math.floor(math.log2(n))
+k = pow(2, math.floor(math.log2(n * W) - m))
 bin_hash = BinaryHash(n, W, k, ks.items())
 bin_hash.compute()
 bin_hash.print_report()
